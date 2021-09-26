@@ -484,6 +484,22 @@ public class FIXValue implements CharSequence {
     /**
      * Set the value to a string.
      *
+     * @param x string
+     * @throws IndexOutOfBoundsException if the string is too long
+     */
+    public void setString(byte[] x) {
+        offset = 0;
+        length = x.length;
+
+        for (int i = 0; i < length; i++)
+            bytes[i] = x[i];
+
+        bytes[length] = SOH;
+    }
+
+    /**
+     * Set the value to a string.
+     *
      * @param x a string
      * @throws IndexOutOfBoundsException if the string is too long
      */

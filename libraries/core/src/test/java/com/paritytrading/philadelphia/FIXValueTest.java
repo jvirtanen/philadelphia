@@ -636,7 +636,14 @@ class FIXValueTest {
     }
 
     @Test
-    void setString() {
+    void setStringWithByteArray() {
+        value.setString(new byte[] { 'F', 'O', 'O' });
+
+        assertEquals("FOO\u0001", put());
+    }
+
+    @Test
+    void setStringWithCharSequence() {
         value.setString("FOO");
 
         assertEquals("FOO\u0001", put());

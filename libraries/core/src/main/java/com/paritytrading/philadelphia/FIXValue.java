@@ -179,17 +179,6 @@ public class FIXValue implements CharSequence {
     }
 
     /**
-     * Copy the value to a destination byte array.
-     *
-     * @param dst a destination byte array
-     * @throws IndexOutOfBoundsException if the length of the value is greater
-     *     than the length of the destination byte array
-     */
-    public void copyTo(byte[] dst) {
-        System.arraycopy(bytes, offset, dst, 0, length);
-    }
-
-    /**
      * Reset the value.
      */
     public void reset() {
@@ -469,6 +458,18 @@ public class FIXValue implements CharSequence {
 
         offset = i;
         length = end - offset - 1;
+    }
+
+    /**
+     * Get the value as a string. This method copies the value to the beginning
+     * of the byte array.
+     *
+     * @param x a byte array
+     * @throws IndexOutOfBoundsException if the length of the value is greater
+     *     than the length of the byte array
+     */
+    public void asString(byte[] x) {
+        System.arraycopy(bytes, offset, x, 0, length);
     }
 
     /**

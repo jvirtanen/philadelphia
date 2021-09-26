@@ -117,17 +117,6 @@ class FIXValueTest {
     }
 
     @Test
-    void copyTo() {
-        value.setInt(123);
-
-        byte[] dst = new byte[6];
-
-        value.copyTo(dst);
-
-        assertArrayEquals(new byte[] { '1', '2', '3', 0, 0, 0 }, dst);
-    }
-
-    @Test
     void reset() {
         value.setString("FOO");
         value.reset();
@@ -629,7 +618,18 @@ class FIXValueTest {
     }
 
     @Test
-    void asString() {
+    void asStringWithByteArray() {
+        value.setInt(123);
+
+        byte[] x = new byte[6];
+
+        value.asString(x);
+
+        assertArrayEquals(new byte[] { '1', '2', '3', 0, 0, 0 }, x);
+    }
+
+    @Test
+    void asStringWithCharSequence() {
         get("FOO\u0001");
 
         assertTrue("FOO".contentEquals(value.asString()));
